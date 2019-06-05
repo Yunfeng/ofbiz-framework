@@ -52,22 +52,22 @@ access. For a detailed description see the core/docs/entityconfig.html file.
     <debug-xa-resources value="false" />  <!-- see https://issues.apache.org/jira/browse/OFBIZ-4282 for more -->
     
     <delegator name="default" entity-model-reader="main" entity-group-reader="main" entity-eca-reader="main" distributed-cache-clear-enabled="false">
-        <group-map group-name="org.apache.ofbiz" datasource-name="localderby"/>
-        <group-map group-name="org.apache.ofbiz.olap" datasource-name="localderbyolap"/>
-        <group-map group-name="org.apache.ofbiz.tenant" datasource-name="localderbytenant"/>
+        <group-map group-name="org.apache.ofbiz" datasource-name="localmysql"/>
+        <group-map group-name="org.apache.ofbiz.olap" datasource-name="localmysqlolap"/>
+        <group-map group-name="org.apache.ofbiz.tenant" datasource-name="localmysqltenant"/>
     </delegator>
     <!-- May be used when you create a service that manages many data for massive imports, this for performance reason or to escape functional cases --> 
     <delegator name="default-no-eca" entity-model-reader="main" entity-group-reader="main" entity-eca-reader="main" entity-eca-enabled="false" distributed-cache-clear-enabled="false">
-        <group-map group-name="org.apache.ofbiz" datasource-name="localderby"/>
-        <group-map group-name="org.apache.ofbiz.olap" datasource-name="localderbyolap"/>
-        <group-map group-name="org.apache.ofbiz.tenant" datasource-name="localderbytenant"/>
+        <group-map group-name="org.apache.ofbiz" datasource-name="localmysql"/>
+        <group-map group-name="org.apache.ofbiz.olap" datasource-name="localmysqlolap"/>
+        <group-map group-name="org.apache.ofbiz.tenant" datasource-name="localmysqltenant"/>
     </delegator>
 
     <!-- Be sure that your default delegator (or the one you use) uses the same datasource for test. You must run "gradlew loadAll" before running "gradlew testIntegration" -->
     <delegator name="test" entity-model-reader="main" entity-group-reader="main" entity-eca-reader="main">
-        <group-map group-name="org.apache.ofbiz" datasource-name="localderby"/>
-        <group-map group-name="org.apache.ofbiz.olap" datasource-name="localderbyolap"/>
-        <group-map group-name="org.apache.ofbiz.tenant" datasource-name="localderbytenant"/>
+        <group-map group-name="org.apache.ofbiz" datasource-name="localmysql"/>
+        <group-map group-name="org.apache.ofbiz.olap" datasource-name="localmysqlolap"/>
+        <group-map group-name="org.apache.ofbiz.tenant" datasource-name="localmysqltenant"/>
     </delegator>
    
     <!-- need to at least define a name for each component to use -->
@@ -357,12 +357,12 @@ access. For a detailed description see the core/docs/entityconfig.html file.
         <read-data reader-name="ext-demo"/>
         <inline-jdbc
                 jdbc-driver="com.mysql.jdbc.Driver"
-                jdbc-uri="jdbc:mysql://127.0.0.1/ofbiz?autoReconnect=true&amp;characterEncoding=UTF-8"
-                jdbc-username="ofbiz"
+                jdbc-uri="jdbc:mysql://buk.mysql.database.chinacloudapi.cn/ofbiz?autoReconnect=true&amp;characterEncoding=UTF-8"
+                jdbc-username="ofbiz@buk"
                 jdbc-password="ofbiz"
                 isolation-level="ReadCommitted"
                 pool-minsize="2"
-                pool-maxsize="250"
+                pool-maxsize="10"
                 time-between-eviction-runs-millis="600000"/><!-- Please note that at least one person has experienced a problem with this value with MySQL
                 and had to set it to -1 in order to avoid this issue.
                 For more look at http://markmail.org/thread/5sivpykv7xkl66px and http://commons.apache.org/dbcp/configuration.html-->
@@ -390,12 +390,12 @@ access. For a detailed description see the core/docs/entityconfig.html file.
         <read-data reader-name="ext-demo"/>
         <inline-jdbc
                 jdbc-driver="com.mysql.jdbc.Driver"
-                jdbc-uri="jdbc:mysql://127.0.0.1/ofbizolap?autoReconnect=true&amp;characterEncoding=UTF-8"
-                jdbc-username="ofbiz"
+                jdbc-uri="jdbc:mysql://buk.mysql.database.chinacloudapi.cn/ofbizolap?autoReconnect=true&amp;characterEncoding=UTF-8"
+                jdbc-username="ofbiz@buk"
                 jdbc-password="ofbiz"
                 isolation-level="ReadCommitted"
-                pool-minsize="2"
-                pool-maxsize="250"
+                pool-minsize="0"
+                pool-maxsize="10"
                 time-between-eviction-runs-millis="600000"/><!-- Please note that at least one person has experienced a problem with this value with MySQL
                 and had to set it to -1 in order to avoid this issue.
                 For more look at http://markmail.org/thread/5sivpykv7xkl66px and http://commons.apache.org/dbcp/configuration.html-->
@@ -423,12 +423,12 @@ access. For a detailed description see the core/docs/entityconfig.html file.
         <read-data reader-name="ext-demo"/>
         <inline-jdbc
                 jdbc-driver="com.mysql.jdbc.Driver"
-                jdbc-uri="jdbc:mysql://127.0.0.1/ofbiztenant?autoReconnect=true&amp;characterEncoding=UTF-8"
-                jdbc-username="ofbiz"
+                jdbc-uri="jdbc:mysql://buk.mysql.database.chinacloudapi.cn/ofbiztenant?autoReconnect=true&amp;characterEncoding=UTF-8"
+                jdbc-username="ofbiz@buk"
                 jdbc-password="ofbiz"
                 isolation-level="ReadCommitted"
-                pool-minsize="2"
-                pool-maxsize="250"
+                pool-minsize="0"
+                pool-maxsize="10"
                 time-between-eviction-runs-millis="600000"/><!-- Please note that at least one person has experienced a problem with this value with MySQL
                 and had to set it to -1 in order to avoid this issue.
                 For more look at http://markmail.org/thread/5sivpykv7xkl66px and http://commons.apache.org/dbcp/configuration.html-->
